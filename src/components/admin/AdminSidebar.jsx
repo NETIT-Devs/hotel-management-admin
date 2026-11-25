@@ -1,17 +1,18 @@
-
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
   CalendarCheck,
   BedDouble,
   Tags,
+  TicketPercent,
   Sparkles,
+  Image as ImageIcon,
   Users,
-  Settings,
+  Globe,
   LogOut,
-  Hotel,
   X,
 } from "lucide-react";
+import logoImg from "../../assets/logo.png";
 
 const AdminSidebar = ({ isOpen, onClose, userRole = "ADMIN" }) => {
   const menuItems = [
@@ -36,19 +37,26 @@ const AdminSidebar = ({ isOpen, onClose, userRole = "ADMIN" }) => {
       icon: Tags,
     },
     {
+      name: "Promo Codes",
+      path: "/admin/promo-codes",
+      icon: TicketPercent,
+    },
+    {
       name: "Facilities",
       path: "/admin/facilities",
       icon: Sparkles,
     },
-  ];
-
-  if (userRole === "SUPER_ADMIN") {
-    menuItems.push({
+    {
+      name: "Gallery",
+      path: "/admin/gallery",
+      icon: ImageIcon,
+    },
+    {
       name: "Admin Management",
       path: "/admin/management",
       icon: Users,
-    });
-  }
+    },
+  ];
 
   return (
     <>
@@ -63,13 +71,20 @@ const AdminSidebar = ({ isOpen, onClose, userRole = "ADMIN" }) => {
         className={`admin-sidebar ${isOpen ? "sidebar-open" : ""}`}
       >
         <div className="sidebar-brand">
-          <div className="brand-icon">
-            <Hotel size={25} />
-          </div>
+          <img
+            src={logoImg}
+            alt="Serenity Bay Logo"
+            style={{
+              height: "48px",
+              width: "auto",
+              objectFit: "contain",
+              flexShrink: 0,
+            }}
+          />
 
           <div>
             <h2>SERENITY BAY</h2>
-            <span>HOTEL & RESORT</span>
+            <span>HOTEL &amp; RESORT</span>
           </div>
 
           <button
@@ -107,21 +122,22 @@ const AdminSidebar = ({ isOpen, onClose, userRole = "ADMIN" }) => {
         </nav>
 
         <div className="sidebar-bottom">
-          <NavLink
-            to="/admin/settings"
+          <a
+            href={window.location.port === "5174" ? "http://localhost:5173/" : "/"}
             className="sidebar-link"
             onClick={onClose}
           >
-            <Settings size={19} />
-            <span>Settings</span>
-          </NavLink>
+            <Globe size={19} />
+            <span>View Website</span>
+          </a>
 
           <button
             className="sidebar-logout"
             onClick={() => {
               localStorage.removeItem("token");
               localStorage.removeItem("user");
-              window.location.href = "/login";
+              window.dispatchEvent(new Event("authChange"));
+              window.location.href = window.location.port === "5174" ? "/login" : "/auth";
             }}
           >
             <LogOut size={19} />
