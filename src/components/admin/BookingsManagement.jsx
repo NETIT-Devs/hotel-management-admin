@@ -359,6 +359,27 @@ const BookingsManagement = () => {
         </span>
       );
     }
+    if (st === "CHECKED_OUT") {
+      return (
+        <span
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "5px",
+            padding: "5px 11px",
+            borderRadius: "999px",
+            fontSize: "11px",
+            fontWeight: 700,
+            background: "#E0F2FE",
+            color: "#075985",
+            border: "1px solid #BAE6FD",
+          }}
+        >
+          <CheckCircle2 size={12} />
+          CHECKED OUT
+        </span>
+      );
+    }
     if (st === "REJECTED" || st === "CANCELLED") {
       return (
         <span
@@ -1055,6 +1076,24 @@ const BookingsManagement = () => {
                                 </>
                               )}
 
+                              {b.status === "APPROVED" && (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setStatusConfirm({
+                                      booking: b,
+                                      nextStatus: "CHECKED_OUT",
+                                      note: b.admin_note || "",
+                                    })
+                                  }
+                                  title="Mark Guest Checked Out (Enables Verified Review)"
+                                  className="table-action-btn btn-approve"
+                                >
+                                  <CheckCircle2 size={14} />
+                                  <span>Check Out</span>
+                                </button>
+                              )}
+
                               <button
                                 type="button"
                                 onClick={() => handleOpenEdit(b)}
@@ -1601,6 +1640,8 @@ const BookingsManagement = () => {
                 <h4>
                   {statusConfirm.nextStatus === "APPROVED"
                     ? "Approve Reservation?"
+                    : statusConfirm.nextStatus === "CHECKED_OUT"
+                    ? "Mark Stay as Checked Out?"
                     : "Reject Reservation?"}
                 </h4>
               </div>
@@ -2116,6 +2157,7 @@ const BookingsManagement = () => {
                   >
                     <option value="PENDING">PENDING</option>
                     <option value="APPROVED">APPROVED</option>
+                    <option value="CHECKED_OUT">CHECKED_OUT</option>
                     <option value="REJECTED">REJECTED</option>
                   </select>
                 </div>

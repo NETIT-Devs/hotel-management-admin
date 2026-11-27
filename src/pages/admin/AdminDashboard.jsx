@@ -10,6 +10,7 @@ import RoomsManagement from "../../components/admin/RoomsManagement";
 import AdminManagement from "../../components/admin/AdminManagement";
 import FacilitiesManagement from "../../components/admin/FacilitiesManagement";
 import GalleryManagement from "../../components/admin/GalleryManagement";
+import ReviewsManagement from "../../components/admin/ReviewsManagement";
 import "../../styles/adminDashboard.css";
 
 const AdminDashboard = ({ activeSection = "overview" }) => {
@@ -33,6 +34,8 @@ const AdminDashboard = ({ activeSection = "overview" }) => {
         return "Facilities & Experiences";
       case "gallery":
         return "Resort Photo Gallery";
+      case "reviews":
+        return "Guest Reviews & Moderation";
       case "management":
         return "Admin Management";
       default:
@@ -54,6 +57,8 @@ const AdminDashboard = ({ activeSection = "overview" }) => {
         return <FacilitiesManagement />;
       case "gallery":
         return <GalleryManagement />;
+      case "reviews":
+        return <ReviewsManagement />;
       case "management":
         return <AdminManagement />;
       default:

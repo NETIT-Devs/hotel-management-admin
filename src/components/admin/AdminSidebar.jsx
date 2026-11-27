@@ -11,6 +11,7 @@ import {
   Globe,
   LogOut,
   X,
+  MessageSquareQuote,
 } from "lucide-react";
 import logoImg from "../../assets/logo.png";
 
@@ -50,6 +51,11 @@ const AdminSidebar = ({ isOpen, onClose, userRole = "ADMIN" }) => {
       name: "Gallery",
       path: "/admin/gallery",
       icon: ImageIcon,
+    },
+    {
+      name: "Reviews",
+      path: "/admin/reviews",
+      icon: MessageSquareQuote,
     },
     {
       name: "Admin Management",

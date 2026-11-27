@@ -41,6 +41,7 @@ const ADMIN_ROUTES = [
   { path: "/admin/rooms", section: "rooms" },
   { path: "/admin/facilities", section: "facilities" },
   { path: "/admin/gallery", section: "gallery" },
+  { path: "/admin/reviews", section: "reviews" },
   { path: "/admin/management", section: "management" },
 ];
 
